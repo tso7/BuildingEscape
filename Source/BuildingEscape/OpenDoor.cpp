@@ -17,17 +17,25 @@ UOpenDoor::UOpenDoor()
 // Called when the game starts
 void UOpenDoor::BeginPlay()
 {
-	AActor *Owner = GetOwner();
-	FRotator NewRotation = FRotator(0.0f, 0.0f, 0.0f);
-	GetOwner()->SetActorRotation(NewRotation);	
+	Super::BeginPlay();
 }
 
+void UOpenDoor::OpenDoor()
+{
+	AActor *Owner = GetOwner();
+	FRotator NewRotation = FRotator(0.0f, OpenAngle, 0.0f);
+	GetOwner()->SetActorRotation(NewRotation);
+}
 
 // Called every frame
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	// Poll trigger volume every frame
+	if (PressurePlate != nullptr && ActorThatOpens != nullptr && PressurePlate->IsOverlappingActor(ActorThatOpens))
+	{
+		OpenDoor();
+	}
 }
 
