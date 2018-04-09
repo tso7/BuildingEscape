@@ -1,5 +1,6 @@
 # Ignoring starter content
-Content/StarterContent/
+Content/StarterContent/Textures
+Content/StarterContent/HDRI
 
 # Created by https://www.gitignore.io/api/unrealengine,visualstudio
 
